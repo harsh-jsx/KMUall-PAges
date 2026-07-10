@@ -54,14 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* Redirect helper shared by both enquiry forms */
-  function goToThankYou(nameInput, courseInput) {
-    const name = nameInput.value.trim();
-    const course = courseInput.value;
-    const params = new URLSearchParams({ name: name, course: course });
-    window.location.href = 'thank-you.html?' + params.toString();
-  }
-
   /* Hero "Get a callback" form */
   const counsellingForm = document.getElementById('counsellingForm');
   if (counsellingForm) {
@@ -73,7 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      goToThankYou(document.getElementById('fullName'), document.getElementById('course'));
+      window.KMULeadForm.submit(counsellingForm, {
+        name: document.getElementById('fullName').value.trim(),
+        course: document.getElementById('course').value
+      });
     });
   }
 
@@ -88,7 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      goToThankYou(document.getElementById('footerFullName'), document.getElementById('footerCourse'));
+      window.KMULeadForm.submit(footerCounsellingForm, {
+        name: document.getElementById('footerFullName').value.trim(),
+        course: document.getElementById('footerCourse').value
+      });
     });
   }
 

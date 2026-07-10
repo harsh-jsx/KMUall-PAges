@@ -75,12 +75,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const name = document.getElementById('fullName').value.trim();
-      const course = document.getElementById('course').value;
-
-      // Pass a couple of values along so the thank-you page can personalize itself
-      const params = new URLSearchParams({ name: name, course: course });
-      window.location.href = 'thank-you.html?' + params.toString();
+      window.KMULeadForm.submit(counsellingForm, {
+        name: document.getElementById('fullName').value.trim(),
+        course: document.getElementById('course').value
+      });
     });
   }
 

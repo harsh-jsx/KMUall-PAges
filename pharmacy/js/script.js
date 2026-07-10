@@ -86,11 +86,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const name = document.getElementById('fullName').value.trim();
-      const course = document.getElementById('course').value;
-
-      const params = new URLSearchParams({ name: name, course: course });
-      window.location.href = 'thank-you.html?' + params.toString();
+      window.KMULeadForm.submit(counsellingForm, {
+        name: document.getElementById('fullName').value.trim(),
+        course: document.getElementById('course').value
+      });
     });
   }
 
@@ -105,11 +104,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const name = document.getElementById('qName').value.trim();
-      const course = document.getElementById('qProgram').value;
-
-      const params = new URLSearchParams({ name: name, course: course });
-      window.location.href = 'thank-you.html?' + params.toString();
+      window.KMULeadForm.submit(quickEnquiryForm, {
+        name: document.getElementById('qName').value.trim(),
+        course: document.getElementById('qProgram').value
+      });
     });
   }
 

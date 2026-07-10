@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N5T4WD9K');</script>
+  <!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K.M. University — BBA &amp; B.Sc. (Hons) Agriculture Science Admissions 2026-27</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-lead-source="kmu-non-engg">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5T4WD9K"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- Top utility bar -->
   <div class="topbar">
@@ -101,12 +112,20 @@
               <input type="tel" id="mobile" name="mobile" placeholder="10-digit mobile" pattern="[0-9]{10}" required>
             </div>
             <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
               <label for="course">Program Interested In</label>
               <select id="course" name="course" required>
                 <option value="" disabled selected>Select a program</option>
                 <option value="bba">BBA</option>
                 <option value="agri-science">B.Sc. (Hons) Agriculture Science</option>
               </select>
+            </div>
+            <div class="form-group">
+              <label for="city">City / State</label>
+              <input type="text" id="city" name="city" placeholder="Your city and state" required>
             </div>
             <button type="submit" class="btn btn-gold btn-block">Get Free Counselling</button>
           </form>
@@ -484,6 +503,70 @@
   <!-- WhatsApp floating button -->
   <a href="https://wa.me/919756664314" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
 
+  <script>
+    (function () {
+      'use strict';
+
+      var LEAD_ENDPOINT = 'https://kmu-backend.vercel.app/api/lead';
+
+      function messageFor(error) {
+        return error && error.message
+          ? error.message
+          : 'We could not submit your enquiry. Please try again.';
+      }
+
+      async function submit(form, options) {
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        var submitButton = form.querySelector('button[type="submit"]');
+        var originalLabel = submitButton ? submitButton.textContent : '';
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Submitting…';
+        }
+
+        var fields = Object.fromEntries(new FormData(form).entries());
+        var name = (options.name || fields.fullName || fields.qName || '').trim();
+        var course = options.course || fields.course || fields.qProgram || '';
+        var payload = {
+          name: name,
+          mobile: (fields.mobile || fields.qMobile || '').trim(),
+          email: (fields.email || '').trim(),
+          program: course,
+          city: (fields.city || '').trim(),
+          source: document.body.getAttribute('data-lead-source') || window.location.pathname
+        };
+
+        try {
+          var response = await fetch(LEAD_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          var result = await response.json().catch(function () { return {}; });
+          if (!response.ok || !result.ok) {
+            var detail = (result.errors && result.errors.join(', ')) || result.error;
+            throw new Error(detail || 'We could not submit your enquiry. Please try again.');
+          }
+
+          var params = new URLSearchParams({ name: name, course: course });
+          window.location.href = 'thank-you.html?' + params.toString();
+        } catch (error) {
+          window.alert(messageFor(error));
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalLabel;
+          }
+        }
+      }
+
+      window.KMULeadForm = { submit: submit };
+    }());
+  </script>
   <script src="js/script.js"></script>
 </body>
 </html>
