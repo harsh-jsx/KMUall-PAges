@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — K.M. University</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-info">
+        <span>📍 Pali Dungra, Sonch Road, Mathura (U.P.) 281123</span>
+        <span>📞 +91 9756664314/15</span>
+      </div>
+      <a href="index.html#counselling-form" class="btn btn-gold btn-sm">Apply Now</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="images/km-logo.png" alt="K.M. University Mathura" class="site-logo-img">
+        <div class="logo-text">
+          <div class="tagline">An UGC Recognized Deemed-to-be University</div>
+        </div>
+      </a>
+      <div class="header-right">
+        <a href="tel:+919756664314" class="header-phone">
+          <span class="icon-circle">📞</span>
+          <span><small>Call us anytime</small>+91 9756664314/15</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="simple-page">
+    <div class="thankyou-card">
+      <div class="check-icon">✓</div>
+      <h1 id="thankyouHeading">Thank You!</h1>
+      <p id="thankyouMessage">Your request has been received. Our admission counsellor will get in touch with you within 24 hours to guide you through the next steps.</p>
+
+      <div class="thankyou-actions">
+        <a href="index.html" class="btn btn-navy">Back to Home</a>
+        <a href="tel:+919756664314" class="btn btn-outline" style="color:var(--navy); border-color:var(--navy);">Call Us Now</a>
+      </div>
+
+      <div class="thankyou-meta">
+        <div><strong>📞 +91 9756664314/15</strong>Admissions Helpline</div>
+        <div><strong>✉️ admission.kmu@kmu.edu.in</strong>Email Us</div>
+        <div><strong>☎️ +91 7943597775</strong>IVR Helpline</div>
+        <div><strong>⏱️ Mon – Sat, 9 AM – 6 PM</strong>Office Hours</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="padding-top:0;">
+        © 2026 K.M. University. All rights reserved. &nbsp;|&nbsp; <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919756664314" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const course = params.get('course');
+
+    const courseLabels = {
+      'mba': 'MBA',
+      'mca': 'MCA',
+      'mtech': 'M.Tech'
+    };
+
+    if (name) {
+      document.getElementById('thankyouHeading').textContent = 'Thank You, ' + name + '!';
+    }
+    if (course && courseLabels[course]) {
+      document.getElementById('thankyouMessage').textContent =
+        'We\'ve received your interest in ' + courseLabels[course] + '. Our admission counsellor will get in touch with you within 24 hours to guide you through the next steps.';
+    }
+  </script>
+</body>
+</html>
