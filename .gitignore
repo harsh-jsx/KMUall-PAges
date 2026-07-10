@@ -1,0 +1,5 @@
+# law/ is its own independent git repo with its own GitHub remote
+law/
+
+.DS_Store
+images for all/
