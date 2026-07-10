@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/non-engg",
+      "destination": "/non-engg/index.html"
+    },
+    {
+      "source": "/non-engg/pharmacy",
+      "destination": "/non-engg/pharmacy/index.html"
+    },
+    {
+      "source": "/non-engg/(.*)",
+      "destination": "/non-engg/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
